@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SENTRO PARTYLIST</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+   .collapse-content {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.4s ease, padding 0.4s ease, opacity 0.4s ease;
+      padding-top: 0;
+      opacity: 0;
+    }
+
+    .collapse-content.active {
+  max-height: 500px; /* you can adjust this */
+  overflow-y: auto;
+  padding-top: 1rem;
+  opacity: 1;
+  scrollbar-width: thin;
+}
+
+.collapse-content img {
+  width: 100%;
+  height: auto;
+  display: block;
+  object-fit: contain;
+}
+
+
+
+
+    .collapse-inner {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+.collapsible-content {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.5s ease, padding 0.5s ease;
+}
+
+.collapsible-content.active {
+  max-height: 2000px; /* make this big enough for your image height */
+  padding: 15px;
+}
+
+.collapsible-content img {
+  width: 100%;
+  height: auto;
+  display: block;
+  object-fit: contain; /* ensures the whole image shows */
+}
+
+ .toggle-icon {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #8B0000;
+    cursor: pointer;
+    margin-left: auto;
+  }
+.text-box {
+  transition: transform 0.3s ease;
+}
+
+.text-box:hover {
+  transform: scale(1.03);
+}
+
+.text-box a button {
+  transition: all 0.3s ease, transform 0.3s ease;
+}
+
+.text-box a button:hover {
+  background-color: #8B0000;
+  color: white;
+  transform: scale(1.1); /* updated from translateY */
+}
+
+.fire-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none; /* so the fire doesn’t block any clicks */
+  z-index: 0; /* place it below your main content */
+  overflow: hidden;
+}
+
+.fire-overlay img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0.9; /* adjust how visible the fire is */
+  animation: fire-flicker 2s infinite alternate ease-in-out;
+}
+
+@keyframes fire-flicker {
+  0% { transform: scale(1.02) translateY(-1px); opacity: 0.2; }
+  100% { transform: scale(1.05) translateY(1px); opacity: 0.3; }
+}
+
+@media (max-width: 600px) {
+  .text-box {
+    flex-direction: column;
+    align-items: flex-start;
+    text-align: left;
+  }
+.text-box {
+  max-width: 660px; /* 👈 keeps it a bit narrower */
+  margin: 0 auto;
+}
+
+
+  .text-box a {
+    align-self: flex-end;
+  }
+}
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: url('red2.jpg') no-repeat center center / cover;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      padding: 2rem;
+    }
+
+    .wrapper {
+  background: rgba(255, 255, 255, 0.95);
+  border-radius: 20px;
+  max-width: 760px; /* 👈 reduced from 1000px */
+  width: 100%;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem; /* 👈 reduced from 2rem */
+  animation: fadeIn 1s ease-in-out;
+}
+.wrapper {
+  position: relative;     /* Add this */
+  z-index: 1;             /* Bring it above the fire */
+  background: rgba(255, 255, 255, 0.95);
+  /* ...rest of your existing styles... */
+}
+
+    .top {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  margin-bottom: 1rem;
+}
+
+
+    .logo {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  background: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+  animation: dropIn 1s ease-out;
+}
+
+
+    .logo img {
+      width: 100%;
+      height: auto;
+      border-radius: 50%;
+    }
+
+    .main-img {
+      max-width: 300px;
+      width: 100%;
+      border-radius: 15px;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.25);
+      animation: fadeIn 1.2s ease;
+    }
+
+   .text-box {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: #fff;
+  border-radius: 15px;
+  padding: 1rem 1.5rem;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.1);
+  gap: 1rem;
+  flex-wrap: wrap;
+  width: 100%;            /* ✅ Ensure full width of parent */
+  max-width: 700px;       /* ✅ Constrain max size */
+  margin: 0 auto;         /* ✅ Center horizontally */
+}
+
+
+
+.text-box h1 {
+  font-size: 1rem;
+  font-weight: 700;
+  color: #8B0000;
+  margin: 0;
+}
+
+.text-box p {
+  font-size: 0.9rem;
+  color: #333;
+  margin: 0;
+  line-height: 1.4;
+}
+
+.text-content {
+  flex: 1;
+  min-width: 200px;
+  min-height: 30px; /* Adjust as needed for visual balance */
+}
+
+
+.text-box a button {
+  padding: 0.4rem 1.2rem;
+  font-size: 0.9rem;
+  background-color: transparent;
+  color: #8B0000;
+  border: 2px solid #8B0000;
+  border-radius: 30px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+
+.text-box a button:hover {
+  background-color: #8B0000;
+  color: white;
+  transform: translateY(-2px);
+}
+
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: scale(0.98); }
+      to { opacity: 1; transform: scale(1); }
+    }
+
+    @keyframes slideUp {
+      from { transform: translateY(30px); opacity: 0; }
+      to { transform: translateY(0); opacity: 1; }
+    }
+
+    @keyframes dropIn {
+      from { transform: translateY(-40px); opacity: 0; }
+      to { transform: translateY(0); opacity: 1; }
+    }
+
+    @media (max-width: 768px) {
+      .top {
+        flex-direction: column;
+        align-items: center;
+      }
+      .main-img {
+        max-width: 90%;
+      }
+    }
+  </style>
+</head>
+<body>
+<div class="fire-overlay">
+  <img src="https://media.tenor.com/3Dv1dt0VcxUAAAAM/fire.gif" alt="Fire" />
+</div>
+  <div class="wrapper">
+    <div class="top">
+      <div class="logo">
+        <img src="sentro.png" alt="Logo">
+      </div>
+         </div>
+   <div class="text-box">
+  <div class="text-content">
+    <h1>G11 & G12 Joint Platforms</h1>
+    <p>View the Grade 11 and Grade 12's joint platforms here.</p>
+  </div>
+  <a href="https://margs112.github.io/JOINTPLATFORMS/" rel="noopener">
+    <button>→</button>
+  </a>
+</div>
+
+   <div class="text-box">
+  <div class="text-content">
+    <h1>Grade 12 Platforms</h1>
+    <p>View the Grade 12's platforms here.</p>
+  </div>
+  <a href="https://margs112.github.io/G12PLATFORMS/" rel="noopener">
+    <button>→</button>
+  </a>
+</div>
+<div class="text-box">
+  <div class="text-content">
+    <h1>Grade 11 Platforms</h1>
+    <p>View the Grade 11's Platforms here.
+
+</p>
+  </div>
+  <a href="https://margs112.github.io/G11PLATFORMS/" rel="noopener">
+    <button>→</button>
+  </a>
+</div>
+  </div>
+<script>
+  document.querySelectorAll('.collapse-btn').forEach(button => {
+    button.addEventListener('click', () => {
+      const content = button.nextElementSibling;
+      content.classList.toggle('active');
+    });
+  });
+  function toggleCollapse(box) {
+    const content = box.querySelector('.collapse-content');
+    const icon = box.querySelector('.toggle-icon');
+    const isActive = content.classList.contains('active');
+
+    // Collapse all others
+    document.querySelectorAll('.collapse-content').forEach(c => c.classList.remove('active'));
+    document.querySelectorAll('.text-box').forEach(b => {
+      b.classList.remove('open');
+      const i = b.querySelector('.toggle-icon');
+      if (i) i.textContent = '+';
+    });
+
+    // Toggle current
+    if (!isActive) {
+      content.classList.add('active');
+      box.classList.add('open');
+      if (icon) icon.textContent = '−';
+    }
+  }
+</script>
+</body>
+</html>
+
+
+
+
